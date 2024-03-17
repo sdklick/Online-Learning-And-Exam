@@ -37,11 +37,11 @@ const Contact = () => {
       <Nav />
 
       <div class="card text-bg-dark text-center">
-        <img
+        {/* <img
           src="https://source.unsplash.com/1600x700/?macbook"
           class="card-img "
           alt="..."
-        />
+        /> */}
         <div class="card-img-overlay">
           <div class="card position-fixed top-50 start-50 translate-middle">
             <div class="row g-0">
