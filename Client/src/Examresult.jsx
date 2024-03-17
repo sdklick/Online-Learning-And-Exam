@@ -109,6 +109,7 @@ const Examresult = () => {
                     <table className="table">
                       <thead>
                         <tr className="table-primary">
+                          <th>Subject</th>
                           <th>Totalquestion</th>
                           <th>RightAnswer</th>
                           <th>Percentage</th>
@@ -116,6 +117,7 @@ const Examresult = () => {
                       </thead>
                       <tbody>
                         <tr className="table-success">
+                          <td>{redata.subject.examsubject}</td>
                           <td>{redata.result.marks.totalmark}</td>
                           <td>{redata.result.marks.obtainmark}</td>
                           <td>

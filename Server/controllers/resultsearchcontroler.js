@@ -1,4 +1,5 @@
 const { registrationmodel } = require("../models/registrationdatamodel");
+const { questionsetschemamodel } = require("../models/questionsetmodel");
 
 const handelresultsearch = async (req, res) => {
   let getdata = req.query.ID;
@@ -6,10 +7,17 @@ const handelresultsearch = async (req, res) => {
     $and: [{ email: getdata.email }, { checkexamkey: getdata.examkey }],
   });
 
+  let examsubject = await questionsetschemamodel.findOne(
+    {
+      examkey: getdata.examkey,
+    },
+    { examsubject: 1, _id: 0 }
+  );
+
   if (response == null) {
     res.send({ found: false, result: null });
   } else {
-    res.send({ found: true, result: response });
+    res.send({ found: true, result: response, subject: examsubject });
   }
 };
 
