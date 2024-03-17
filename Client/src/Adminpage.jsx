@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Adminpage = () => {
   const [examdata, setexamdata] = useState({});
@@ -11,6 +12,21 @@ const Adminpage = () => {
   const [adminsignin, setadminsignin] = useState({});
   const [isadminsignin, setisadminsignin] = useState(false);
   const [navhide, setnavhide] = useState(false);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = localStorage.getItem("admin");
+    if (auth) {
+      navigate("/adminpage");
+    }
+  }, []);
+  useEffect(() => {
+    const auth = localStorage.getItem("admintoken");
+    if (auth) {
+      setisadminsignin(true);
+      setnavhide(true);
+    }
+  }, []);
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get("http://localhost:2000/api/examlist");
@@ -19,14 +35,6 @@ const Adminpage = () => {
       setmapdata(fidata);
     };
     fetchdata();
-  }, []);
-
-  useEffect(() => {
-    const auth = localStorage.getItem("admintoken");
-    if (auth) {
-      setisadminsignin(true);
-      setnavhide(true);
-    }
   }, []);
 
   const qdisplay = (indexval) => {
@@ -41,7 +49,6 @@ const Adminpage = () => {
   const datasubmitadminsignin = async (e) => {
     e.preventDefault();
 
-
     const response = await axios.post(
       "http://localhost:2000/api/adminsignin",
       adminsignin
@@ -50,8 +57,6 @@ const Adminpage = () => {
     localStorage.setItem("admintoken", response.data.auth);
     setisadminsignin(response.data.found);
     setnavhide(true);
-
-    
 
     if (response.data.found == true) {
       toast("✔️ Login Success");

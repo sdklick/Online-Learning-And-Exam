@@ -9,18 +9,21 @@ import Contact from "./Contact";
 import Adminpage from "./Adminpage.jsx";
 import Exampage from "./Exampage.jsx";
 import Examresult from "./Examresult.jsx";
+import Admin_private_component from "./Admin_private_component.jsx";
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route element={<Admin_private_component/>}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/setquestion" element={<Setquestion />} />
           <Route path="/exampage" element={<Exampage />} />
           <Route path="/examresult" element={<Examresult />} />
-          <Route path="/adminpage" element={<Adminpage />} />
           <Route path="/contact" element={<Contact />} />
+          </Route>
+          <Route path="/adminpage" element={<Adminpage />} />
         </Routes>
       </BrowserRouter>
     </>
