@@ -46,7 +46,10 @@ server.get("/api/signin", qsetsignin);
 server.post("/api/adminsignin", handeladmincheck);
 server.get("/api/resultsearch", handelresultsearch);
 server.get("/api/examlist", handelexamlist);
-
+server.get("/api/adminregis_result", async (req, res) => {
+  let response = await registrationmodel.find({});
+  res.send(response);
+});
 server.listen(PORT, () => {
   console.log("server Start");
 });

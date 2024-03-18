@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Admin_examregis_result from "./Admin_examregis_result";
 
 const Adminpage = () => {
   const [examdata, setexamdata] = useState({});
@@ -248,6 +249,7 @@ const Adminpage = () => {
           </div>
         </div>
       )}
+      <Admin_examregis_result />
       <ToastContainer />
     </>
   );
