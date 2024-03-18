@@ -53,10 +53,12 @@ const Adminpage = () => {
       "http://localhost:2000/api/adminsignin",
       adminsignin
     );
-    localStorage.setItem("admin", response.data.found);
-    localStorage.setItem("admintoken", response.data.auth);
-    setisadminsignin(response.data.found);
-    setnavhide(true);
+    if (response.data.found == true) {
+      localStorage.setItem("admin", response.data.found);
+      localStorage.setItem("admintoken", response.data.auth);
+      setisadminsignin(response.data.found);
+      setnavhide(true);
+    }
 
     if (response.data.found == true) {
       toast("✔️ Login Success");
