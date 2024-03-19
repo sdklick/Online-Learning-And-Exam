@@ -9,17 +9,15 @@ const Admin_examregis_result = () => {
     let result = await axios.get("http://localhost:2000/api/adminregis_result");
     setdata(result);
     setisdata(true);
-
-    console.log(result);
   };
 
   return (
     <>
-      <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
+      <div className="accordion accordion-flush" id="accordionFlushExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header">
             <button
-              class="accordion-button collapsed"
+              className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseOne"
@@ -32,11 +30,11 @@ const Admin_examregis_result = () => {
           </h2>
           <div
             id="flush-collapseOne"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             data-bs-parent="#accordionFlushExample"
           >
-            <div class="accordion-body">
-              <div class="table-responsive">
+            <div className="accordion-body">
+              <div className="table-responsive">
                 <table className="table">
                   <thead>
                     <tr className="table-primary">
@@ -53,25 +51,31 @@ const Admin_examregis_result = () => {
                   {isdata ? (
                     <tbody>
                       {alldata.data.map(
-                        ({ fullname, gender, age, phoneno, email, marks }) => {
+                        ({
+                          _id,
+                          fullname,
+                          gender,
+                          age,
+                          phoneno,
+                          email,
+                          marks,
+                        }) => {
                           return (
-                            <>
-                              <tr className="table-success">
-                                <td>{fullname}</td>
-                                <td>{gender}</td>
-                                <td>{age}</td>
-                                <td>{phoneno}</td>
-                                <td>{email}</td>
-                                <td>Na</td>
+                            <tr className="table-success" key={_id}>
+                              <td>{fullname}</td>
+                              <td>{gender}</td>
+                              <td>{age}</td>
+                              <td>{phoneno}</td>
+                              <td>{email}</td>
+                              <td>Na</td>
 
-                                {marks && (
-                                  <>
-                                    <td>{marks.totalmark}</td>
-                                    <td>{marks.obtainmark}</td>
-                                  </>
-                                )}
-                              </tr>
-                            </>
+                              {marks && (
+                                <>
+                                  <td>{marks.totalmark}</td>
+                                  <td>{marks.obtainmark}</td>
+                                </>
+                              )}
+                            </tr>
                           );
                         }
                       )}

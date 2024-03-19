@@ -83,28 +83,28 @@ const Adminpage = () => {
 
       {/* Login section */}
       {isadminsignin == false ? (
-        <div class="card text-center">
-          <div class="card-header">Admin Login</div>
+        <div className="card text-center">
+          <div className="card-header">Admin Login</div>
 
-          <div class="card-body">
+          <div className="card-body">
             <form onSubmit={datasubmitadminsignin}>
-              <div class="row">
-                <div class="col">
+              <div className="row">
+                <div className="col">
                   <input
                     type="text"
                     name="adminid"
                     onChange={admininputsignin}
-                    class="form-control"
+                    className="form-control"
                     placeholder="Enter Admin_id"
                     required
                   />
                 </div>
-                <div class="col">
+                <div className="col">
                   <input
                     type="text"
                     name="adminpassword"
                     onChange={admininputsignin}
-                    class="form-control"
+                    className="form-control"
                     placeholder="Enter Admin_Password"
                     required
                   />
@@ -121,135 +121,136 @@ const Adminpage = () => {
       {examdata.data == false || isadminsignin == false ? (
         <img
           src="src\assets\examlist.jpg"
-          class="mt-3 rounded mx-auto d-block"
+          className="mt-3 rounded mx-auto d-block"
           height="400px"
           alt="Lock"
         />
       ) : (
-        <div class="card text-center">
-          <div class="card-header">
+        <div className="card text-center">
+          <div className="card-header">
             <span className="fs-4">Welcome To Admin Page</span>
-            <buttom onClick={Logout} className="btn btn-success float-end">
+            <button onClick={Logout} className="btn btn-success float-end">
               Logout
-            </buttom>
+            </button>
           </div>
-          <div class="card-body" style={{ backgroundColor: "#77ba84" }}>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
+          <div className="card-body" style={{ backgroundColor: "#77ba84" }}>
+            <div className="row row-cols-1 row-cols-md-4 g-4">
               {mapdata.map((val, index) => {
                 return (
-                  <>
-                    <div key={val._id} class="col">
-                      <div class="card">
-                        <img
-                          src={`https://source.unsplash.com/1600x700/?${
-                            val.examsubject || "book"
-                          }`}
-                          class="card-img-top"
-                          alt="..."
-                        />
-                        <div class="card-body">
-                          <div class="card text-center">
-                            <div class="card-header">
-                              <p>
-                                <em>Set by {val.setpersonname}</em>
-                              </p>
-                            </div>
-                            <div class="card-body">
-                              <p class="card-title">
-                                ExamName : {val.examsubject}
-                              </p>
-                              <p class="card-title">ExamKey → {val.examkey}</p>
-                            </div>
+                  <div key={val._id} className="col">
+                    <div className="card">
+                      <img
+                        src={`https://source.unsplash.com/1600x700/?${
+                          val.examsubject || "book"
+                        }`}
+                        className="card-img-top"
+                        alt="..."
+                      />
+                      <div className="card-body">
+                        <div className="card text-center">
+                          <div className="card-header">
+                            <p>
+                              <em>Set by {val.setpersonname}</em>
+                            </p>
+                          </div>
+                          <div className="card-body">
+                            <p className="card-title">
+                              ExamName : {val.examsubject}
+                            </p>
+                            <p className="card-title">
+                              ExamKey → {val.examkey}
+                            </p>
+                          </div>
 
-                            <div class="accordion" id="accordionExample">
-                              <div class="accordion-item">
-                                <h2
-                                  class="accordion-header"
-                                  id={`heading${index}`}
+                          <div className="accordion" id="accordionExample">
+                            <div className="accordion-item">
+                              <h2
+                                className="accordion-header"
+                                id={`heading${index}`}
+                              >
+                                <button
+                                  className="accordion-button"
+                                  type="button"
+                                  onClick={() => qdisplay(index)}
+                                  data-bs-toggle="collapse"
+                                  data-bs-target={`#collapse${index}`}
+                                  aria-expanded="false"
+                                  aria-controls="collapseOne"
                                 >
-                                  <button
-                                    class="accordion-button"
-                                    type="button"
-                                    onClick={() => qdisplay(index)}
-                                    data-bs-toggle="collapse"
-                                    data-bs-target={`#collapse${index}`}
-                                    aria-expanded="false"
-                                    aria-controls="collapseOne"
-                                  >
-                                    Question Details
-                                  </button>
-                                </h2>
-                                <div
-                                  id={`collapse${index}`}
-                                  class="accordion-collapse collapse"
-                                  aria-labelledby={`heading${index}`}
-                                  data-bs-parent="#accordionExample"
-                                >
-                                  <div class="accordion-body">
-                                    {qmap.length != 0
-                                      ? qmap.map((qlist, index) => {
-                                          return (
-                                            <>
+                                  Question Details
+                                </button>
+                              </h2>
+                              <div
+                                id={`collapse${index}`}
+                                className="accordion-collapse collapse"
+                                aria-labelledby={`heading${index}`}
+                                data-bs-parent="#accordionExample"
+                              >
+                                <div className="accordion-body">
+                                  {qmap.length != 0
+                                    ? qmap.map((qlist, index) => {
+                                        return (
+                                          <div key={index}>
+                                            <ul>
+                                              <li>{`${
+                                                qlist[`_${index + 1}q`]
+                                              }`}</li>
+
                                               <ul>
                                                 <li>{`${
-                                                  qlist[`_${index + 1}q`]
+                                                  qlist[
+                                                    `op1question${index + 1}`
+                                                  ]
                                                 }`}</li>
-
-                                                <ul>
-                                                  <li>{`${
-                                                    qlist[
-                                                      `op1question${index + 1}`
-                                                    ]
-                                                  }`}</li>
-                                                  <li>{`${
-                                                    qlist[
-                                                      `op2question${index + 1}`
-                                                    ]
-                                                  }`}</li>
-                                                  <li>{`${
-                                                    qlist[
-                                                      `op3question${index + 1}`
-                                                    ]
-                                                  }`}</li>
-                                                  <li
-                                                    style={{ color: "green" }}
-                                                  >{`${
-                                                    qlist[
-                                                      `ansquestion${index + 1}`
-                                                    ]
-                                                  }`}</li>
-                                                </ul>
+                                                <li>{`${
+                                                  qlist[
+                                                    `op2question${index + 1}`
+                                                  ]
+                                                }`}</li>
+                                                <li>{`${
+                                                  qlist[
+                                                    `op3question${index + 1}`
+                                                  ]
+                                                }`}</li>
+                                                <li
+                                                  style={{ color: "green" }}
+                                                >{`${
+                                                  qlist[
+                                                    `ansquestion${index + 1}`
+                                                  ]
+                                                }`}</li>
                                               </ul>
-                                              <p></p>
-                                            </>
-                                          );
-                                        })
-                                      : null}
-                                  </div>
+                                            </ul>
+                                            <p></p>
+                                          </div>
+                                        );
+                                      })
+                                    : null}
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <button type="button" class="btn btn-danger mt-3">
-                            Delete
-                          </button>
                         </div>
+                        <button type="button" className="btn btn-danger mt-3">
+                          Delete
+                        </button>
+                      </div>
 
-                        <div class="card-footer">
-                          <small class="text-body-secondary">
-                            Created At {val.setdate} {val.settime}
-                          </small>
-                        </div>
+                      <div className="card-footer">
+                        <small className="text-body-secondary">
+                          Created At {val.setdate} {val.settime}
+                        </small>
                       </div>
                     </div>
-                  </>
+                  </div>
                 );
               })}
             </div>
           </div>
+          <Admin_examregis_result />
         </div>
       )}
-      <Admin_examregis_result />
+
       <ToastContainer />
     </>
   );
