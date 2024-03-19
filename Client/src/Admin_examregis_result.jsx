@@ -1,14 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const Admin_examregis_result = () => {
   const [alldata, setdata] = useState([]);
   const [isdata, setisdata] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  let getdata = async () => {
-    let result = await axios.get("http://localhost:2000/api/adminregis_result");
+  let getdata = async (data) => {
+    let result = await axios.get(
+      "http://localhost:2000/api/adminregis_result",
+      {
+        params: { scarch: data },
+      }
+    );
     setdata(result);
     setisdata(true);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    getdata(searchQuery);
+  };
+
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
   };
 
   return (
@@ -34,6 +49,18 @@ const Admin_examregis_result = () => {
             data-bs-parent="#accordionFlushExample"
           >
             <div className="accordion-body">
+              <form className="d-flex" role="search" onSubmit={handleSubmit}>
+                <input
+                  className="form-control me-2 mb-5"
+                  type="search"
+                  placeholder="Search Anything"
+                  aria-label="Search"
+                  onChange={handleChange}
+                />
+                <button className="btn btn-success mb-5" type="submit">
+                  Search
+                </button>
+              </form>
               <div className="table-responsive">
                 <table className="table">
                   <thead>
@@ -43,7 +70,7 @@ const Admin_examregis_result = () => {
                       <th>Age</th>
                       <th>Phnoneno</th>
                       <th>Email</th>
-                      <th>Subject</th>
+                      <th>Examname</th>
                       <th>Total</th>
                       <th>Obtain</th>
                     </tr>
@@ -59,6 +86,7 @@ const Admin_examregis_result = () => {
                           phoneno,
                           email,
                           marks,
+                          findsubject_examcode,
                         }) => {
                           return (
                             <tr className="table-success" key={_id}>
@@ -67,7 +95,7 @@ const Admin_examregis_result = () => {
                               <td>{age}</td>
                               <td>{phoneno}</td>
                               <td>{email}</td>
-                              <td>Na</td>
+                              <td>{findsubject_examcode.examsubject}</td>
 
                               {marks && (
                                 <>
