@@ -128,7 +128,7 @@ const Adminpage = () => {
       ) : (
         <div className="card text-center">
           <div className="card-header">
-            <span className="fs-4">Welcome To Admin Page</span>
+            <span className="fs-4">Welcome To Admin Dashboard</span>
             <button onClick={Logout} className="btn btn-success float-end">
               Logout
             </button>

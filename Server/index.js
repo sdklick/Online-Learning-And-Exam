@@ -12,6 +12,7 @@ const { handeladmincheck } = require("./controllers/admincheckcontroler");
 const { handelresultsearch } = require("./controllers/resultsearchcontroler");
 const { handelexamlist } = require("./controllers/adminexamlistcontroler");
 const { qsetsignin } = require("./controllers/questionsetsignincontroler");
+const {adminregis_result} = require("./controllers/adminregis_result_controller");
 const { registrationmodel } = require("./models/registrationdatamodel");
 
 const cors = require("cors");
@@ -46,10 +47,7 @@ server.get("/api/signin", qsetsignin);
 server.post("/api/adminsignin", handeladmincheck);
 server.get("/api/resultsearch", handelresultsearch);
 server.get("/api/examlist", handelexamlist);
-server.get("/api/adminregis_result", async (req, res) => {
-  let response = await registrationmodel.find({});
-  res.send(response);
-});
+server.get("/api/adminregis_result", adminregis_result);
 server.listen(PORT, () => {
   console.log("server Start");
 });
