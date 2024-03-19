@@ -9,11 +9,20 @@ const handelregisdata = async (req, res) => {
   let checkemailandexamkey = await registrationmodel.findOne({
     $and: [{ checkexamkey: data.checkexamkey }, { email: data.email }],
   });
+
+  let findsubject_examcode = await questionsetschemamodel.findOne(
+    {
+      examkey: data.checkexamkey,
+    },
+    { examsubject: 1, _id: 0 }
+  );
+
   if (response == null) {
     res.send({ found: false });
   } else {
     if (checkemailandexamkey == null) {
-      await registrationmodel.insertMany(data);
+      let add = { ...data, findsubject_examcode };
+      await registrationmodel.insertMany(add);
       res.send({ found: true, rdata: response });
     } else {
       res.send({ found: "examsubmit" });
@@ -21,4 +30,4 @@ const handelregisdata = async (req, res) => {
   }
 };
 
-module.exports={handelregisdata}
+module.exports = { handelregisdata };
