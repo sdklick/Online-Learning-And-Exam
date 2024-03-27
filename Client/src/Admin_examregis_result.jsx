@@ -7,14 +7,18 @@ const Admin_examregis_result = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   let getdata = async (data) => {
-    let result = await axios.get(
-      "http://localhost:2000/api/adminregis_result",
-      {
-        params: { scarch: data },
-      }
-    );
-    setdata(result);
-    setisdata(true);
+    try {
+      let result = await axios.get(
+        "http://localhost:2000/api/adminregis_result",
+        {
+          params: { scarch: data },
+        }
+      );
+      setdata(result);
+      setisdata(true);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const handleSubmit = (event) => {
