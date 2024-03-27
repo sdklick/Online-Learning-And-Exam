@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import { NavLink } from "react-router-dom";
-import { AboutsubApi,AboutTechApi } from "./dataapi";
+import { AboutsubApi, AboutTechApi } from "./dataapi";
 
 const About = () => {
   return (
@@ -54,17 +54,18 @@ const About = () => {
                     </p>
                   </div>
 
-                  {AboutsubApi.map((val,index) => {
+                  {AboutsubApi.map((val, index) => {
                     return (
-                      <>
-                        <span key={index+1} className="btn btn-outline-success fw-bold border rounded-pill btn-sm">
-                          <i
-                            className="fa fa-tag"
-                            style={{ fontSize: "20px", color: "orange" }}
-                          ></i>
-                          <p style={{ fontSize: "12px" }}>{val.subname}</p>
-                        </span>
-                      </>
+                      <span
+                        key={index + 1}
+                        className="btn btn-outline-success fw-bold border rounded-pill btn-sm"
+                      >
+                        <i
+                          className="fa fa-tag"
+                          style={{ fontSize: "20px", color: "orange" }}
+                        ></i>
+                        <p style={{ fontSize: "12px" }}>{val.subname}</p>
+                      </span>
                     );
                   })}
 
@@ -83,15 +84,16 @@ const About = () => {
                   </div>
                   {AboutTechApi.map((val) => {
                     return (
-                      <>
-                        <span key={val.id} className="btn btn-outline-success fw-bold border rounded-pill btn-sm">
-                          <i
-                            className={val.ticon}
-                            style={{ fontSize: "20px", color: "orange" }}
-                          ></i>
-                          <p style={{ fontSize: "12px" }}>{val.tname}</p>
-                        </span>
-                      </>
+                      <span
+                        key={val.id}
+                        className="btn btn-outline-success fw-bold border rounded-pill btn-sm"
+                      >
+                        <i
+                          className={val.ticon}
+                          style={{ fontSize: "20px", color: "orange" }}
+                        ></i>
+                        <p style={{ fontSize: "12px" }}>{val.tname}</p>
+                      </span>
                     );
                   })}
                 </div>
