@@ -1,4 +1,4 @@
-const { registrationmodel } = require("../models/registrationdatamodel");
+const{ registrationmodel } = require("../models/registrationdatamodel");
 const resultdata = async (req, res) => {
   let data = req.body;
   let updateval = { obtainmark: data.obtainmarks, totalmark: data.totalmarks };
