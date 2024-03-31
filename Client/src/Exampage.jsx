@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./exampage.css";
+import axios from "axios";
 
 const Exampage = () => {
   const [registationdata, setregisdata] = useState({});
@@ -28,14 +29,10 @@ const Exampage = () => {
   }, [liveqdata]);
 
   const serveresultdata = async (marksobtain) => {
-    const response = await fetch("http://localhost:2000/api/resultdata", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(marksobtain),
-    });
+    const response = await axios.post(
+      "http://localhost:2000/api/resultdata",
+      marksobtain
+    );
   };
 
   const handelregisinput = (val) => {
