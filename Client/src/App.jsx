@@ -10,6 +10,7 @@ import Adminpage from "./Adminpage.jsx";
 import Exampage from "./Exampage.jsx";
 import Examresult from "./Examresult.jsx";
 import Admin_private_component from "./Admin_private_component.jsx";
+import Nopage404 from "./Nopage404.jsx";
 const App = () => {
   return (
     <>
@@ -22,7 +23,7 @@ const App = () => {
           <Route path="/exampage" element={<Exampage />} />
           <Route path="/examresult" element={<Examresult />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<h1>No Element</h1>} />
+          <Route path="*" element={<Nopage404/>} />
           </Route>
           <Route path="/adminpage" element={<Adminpage />} />
         </Routes>
