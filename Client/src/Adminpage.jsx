@@ -119,12 +119,14 @@ const Adminpage = () => {
       ) : null}
 
       {examdata.data == false || isadminsignin == false ? (
-        <img
-          src="src\assets\examlist.jpg"
-          className="mt-3 rounded mx-auto d-block"
-          height="400px"
-          alt="Lock"
-        />
+        <div className="card text-center">
+          <img
+            src="src\assets\examlist.jpg"
+            className="mt-3 rounded mx-auto d-block"
+            height="290px"
+            alt="Lock"
+          />
+        </div>
       ) : (
         <div className="card text-center">
           <div className="card-header">

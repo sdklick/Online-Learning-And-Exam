@@ -75,7 +75,7 @@ const Examresult = () => {
             <img
               src="src\assets\resnot.jpg"
               className="mt-3 rounded mx-auto d-block"
-              height="470px"
+              height="400px"
               alt="Lock"
             />
           </div>
