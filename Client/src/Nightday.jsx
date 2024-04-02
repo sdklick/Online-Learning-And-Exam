@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import lightpng from "../src/assets/light.png";
+import nightpng from "../src/assets/night.png";
 
 const Nightday = () => {
   const [data, setdata] = useState("light");
@@ -19,13 +21,13 @@ const Nightday = () => {
         {data == "light" ? (
           <img
             onClick={() => setdata("night")}
-            src="src\assets\light.png"
+            src={lightpng}
             style={{ height: "34px" }}
           />
         ) : (
           <img
             onClick={() => setdata("light")}
-            src="src\assets\night.png"
+            src={nightpng}
             style={{ height: "34px" }}
           />
         )}

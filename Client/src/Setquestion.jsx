@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Nav from "./Nav";
+import lockpng from "../src/assets/lock.png"
 
 const Setquestion = () => {
   const [signindata, setsignindata] = useState({});
@@ -166,7 +167,7 @@ const Setquestion = () => {
         </div>
       ) : login == false ? (
         <img
-          src="src\assets\lock.png"
+          src={lockpng}
           className="mt-3 rounded mx-auto d-block"
           height="400px"
           alt="Lock"

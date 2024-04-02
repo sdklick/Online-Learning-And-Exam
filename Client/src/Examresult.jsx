@@ -4,6 +4,8 @@ import axios from "axios";
 import Footer from "./Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import resnotjpg from "../src/assets/resnot.jpg";
+import resultjpg from "../src/assets/result.jpg";
 
 const Examresult = () => {
   const [resultdata, checkresultdata] = useState({});
@@ -73,7 +75,7 @@ const Examresult = () => {
             </form>
 
             <img
-              src="src\assets\resnot.jpg"
+              src={resnotjpg}
               className="mt-3 rounded mx-auto d-block"
               height="400px"
               alt="Lock"
@@ -90,7 +92,7 @@ const Examresult = () => {
               <div className="row g-0">
                 <div className="col-md-4">
                   <img
-                    src="src\assets\result.jpg"
+                    src={resultjpg}
                     className="mt-3 rounded mx-auto d-block"
                     height="250px"
                     alt="Lock"

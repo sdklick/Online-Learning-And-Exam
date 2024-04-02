@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Nightday from "./Nightday";
 import Signupmodal from "./Signupmodal";
+import adminpng from "../src/assets/admin.png";
+
 
 const Nav = () => {
   const [logsuccess, setlogsuccess] = useState(false);
@@ -63,7 +65,7 @@ const Nav = () => {
             </ul>
           </div>
           <NavLink to="/adminpage" className="nav-link">
-            <img src="src\assets\admin.png" height="45" alt="A" />
+            <img src={adminpng} height="45" alt="A" />
           </NavLink>
 
           <Nightday />
