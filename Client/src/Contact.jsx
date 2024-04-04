@@ -36,105 +36,112 @@ const Contact = () => {
     <>
       <Nav />
 
-      <div class="card text-bg-dark text-center">
-        {/* <img
+      <div class="card text-center">
+        <div class="card-header">Contact Us</div>
+        <div class="card-body">
+          <div class="card text-bg-success text-center">
+            {/* <img
           src="https://source.unsplash.com/1600x700/?macbook"
           class="card-img "
           alt="..."
         /> */}
-        <div class="card-img-overlay">
-          <div class="card position-fixed top-50 start-50 translate-middle">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img
-                  src="https://source.unsplash.com/550x800/?iphone"
-                  class="img-fluid rounded-start"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body ">
-                  <form onSubmit={contactdatasubmit}>
-                    <h4 class="card-title mb-4">Contact Us</h4>
-                    <div
-                      class="row border rounded-pill"
-                      style={{ backgroundColor: "orange" }}
-                    >
-                      <div class="col ">
-                        <input
-                          type="text"
-                          name="fullname"
-                          onChange={contactinput}
-                          class="form-control"
-                          placeholder="Name"
-                          aria-label="First name"
-                          required
-                        />
+            <div class="card">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src="https://source.unsplash.com/550x800/?iphone"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                    style={{ height: "500px" }}
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body ">
+                    <form onSubmit={contactdatasubmit}>
+                      <div
+                        class="row border rounded-pill"
+                        style={{ backgroundColor: "orange" }}
+                      >
+                        <div class="col ">
+                          <input
+                            type="text"
+                            name="fullname"
+                            onChange={contactinput}
+                            class="form-control"
+                            placeholder="Name"
+                            aria-label="First name"
+                            required
+                          />
+                        </div>
+                        <div class="col">
+                          <input
+                            type="number"
+                            name="mobileno"
+                            onChange={contactinput}
+                            class="form-control"
+                            placeholder="Mobile No"
+                            aria-label="Last name"
+                            required
+                          />
+                        </div>
                       </div>
-                      <div class="col">
-                        <input
-                          type="number"
-                          name="mobileno"
-                          onChange={contactinput}
-                          class="form-control"
-                          placeholder="Mobile No"
-                          aria-label="Last name"
-                          required
-                        />
-                      </div>
-                    </div>
 
-                    <div class="row mt-3" style={{ backgroundColor: "white" }}>
-                      <div class="col ">
-                        <input
-                          type="email"
-                          name="email"
-                          onChange={contactinput}
-                          class="form-control border border-secondary rounded-pill"
-                          placeholder="Email                                        ⚛"
-                          aria-label="First name"
-                          required
-                        />
+                      <div
+                        class="row mt-3"
+                        style={{ backgroundColor: "white" }}
+                      >
+                        <div class="col ">
+                          <input
+                            type="email"
+                            name="email"
+                            onChange={contactinput}
+                            class="form-control border border-secondary rounded-pill"
+                            placeholder="Email                                        ⚛"
+                            aria-label="First name"
+                            required
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div
-                      class="row mt-3 border rounded-pill"
-                      style={{ backgroundColor: "green" }}
-                    >
-                      <div class="col  ">
-                        <input
-                          type="text"
-                          name="subject"
-                          onChange={contactinput}
-                          class="form-control"
-                          placeholder="Subject"
-                          aria-label="First name"
-                          required
-                        />
+                      <div
+                        class="row mt-3 border rounded-pill"
+                        style={{ backgroundColor: "green" }}
+                      >
+                        <div class="col  ">
+                          <input
+                            type="text"
+                            name="subject"
+                            onChange={contactinput}
+                            class="form-control"
+                            placeholder="Subject"
+                            aria-label="First name"
+                            required
+                          />
+                        </div>
+                        <div class="col">
+                          <input
+                            type="text"
+                            name="message"
+                            onChange={contactinput}
+                            class="form-control "
+                            placeholder="Message"
+                            aria-label="Last name"
+                            required
+                          />
+                        </div>
                       </div>
-                      <div class="col">
-                        <input
-                          type="text"
-                          name="message"
-                          onChange={contactinput}
-                          class="form-control "
-                          placeholder="Message"
-                          aria-label="Last name"
-                          required
-                        />
-                      </div>
-                    </div>
 
-                    <button type="submit" className="btn btn-primary mt-5">
-                      Submit
-                    </button>
-                  </form>
+                      <button type="submit" className="btn btn-primary mt-5">
+                        Submit
+                      </button>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <ToastContainer />
     </>
   );
