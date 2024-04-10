@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Admin_examregis_result from "./Admin_examregis_result";
 import examlistjpg from "../src/assets/examlist.jpg";
 
-
 const Adminpage = () => {
   const [examdata, setexamdata] = useState({});
   const [mapdata, setmapdata] = useState([]);
@@ -18,18 +17,14 @@ const Adminpage = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    const auth = localStorage.getItem("admin");
-    if (auth) {
-      navigate("/adminpage");
-    }
-  }, []);
-  useEffect(() => {
     const auth = localStorage.getItem("admintoken");
     if (auth) {
+      navigate("/adminpage");
       setisadminsignin(true);
       setnavhide(true);
     }
   }, []);
+
   useEffect(() => {
     const fetchdata = async () => {
       const response = await axios.get("http://localhost:2000/api/examlist");

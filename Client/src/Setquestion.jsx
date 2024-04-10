@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Nav from "./Nav";
-import lockpng from "../src/assets/lock.png"
+import lockpng from "../src/assets/lock.png";
+import { useNavigate } from "react-router-dom";
 
 const Setquestion = () => {
   const [signindata, setsignindata] = useState({});
@@ -12,6 +13,19 @@ const Setquestion = () => {
   const [timeloop, settimeloop] = useState([]);
   const [login, setlogin] = useState(false);
   const [pname, setpname] = useState("");
+  const [navhide, setnavhide] = useState(false);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = localStorage.getItem("examinertoken");
+    const examinername = localStorage.getItem("examinername");
+    if (auth) {
+      navigate("/setquestion");
+      setlogin(true);
+      setnavhide(true);
+      setpname(examinername);
+    }
+  }, []);
 
   const Questionsendserver = async (qdata) => {
     const response = await fetch("http://localhost:2000/api/question", {
@@ -45,9 +59,13 @@ const Setquestion = () => {
 
       const setdate = `${dd}/${mm}/${yyyy}`;
 
-
       let settime = today.toLocaleTimeString();
-      let addcreatepersonname = { setpersonname: pname, settime, setdate,qcount:many };
+      let addcreatepersonname = {
+        setpersonname: pname,
+        settime,
+        setdate,
+        qcount: many,
+      };
       let alldata = Question;
       let finaldata = { ...addcreatepersonname, ...alldata };
       Questionsendserver(finaldata);
@@ -55,8 +73,6 @@ const Setquestion = () => {
       toast("Please Fill Out All Field");
     }
   };
-
-
 
   const howmanyset = () => {
     let numcasting = Math.round(Number(many));
@@ -79,14 +95,19 @@ const Setquestion = () => {
   const datasubmitsignin = async (e) => {
     e.preventDefault();
 
-    const response = await axios.get("http://localhost:2000/api/signin", {
-      params: {
-        ID: signindata,
-      },
-    });
+    const response = await axios.post(
+      "http://localhost:2000/api/signin",
+      signindata
+    );
 
-    setpname(response.data.username);
-    setlogin(response.data.found);
+    if (response.data.found) {
+      localStorage.setItem("examinername", response.data.username);
+      localStorage.setItem("examinertoken", response.data.auth);
+      const examinername = localStorage.getItem("examinername");
+      setlogin(true);
+      setnavhide(true);
+      setpname(examinername);
+    }
 
     if (response.data.found == true) {
       toast("✔️ Login Success");
@@ -95,9 +116,18 @@ const Setquestion = () => {
     }
   };
 
+  const Logout = () => {
+    let surelogout = confirm("Are You Sure Logout");
+    if (surelogout) {
+      localStorage.clear();
+      window.location.reload(false);
+      setlogin(false);
+    }
+  };
+
   return (
     <>
-      <Nav />
+      {navhide ? null : <Nav />}
       {/* Login section */}
       <div className="card text-center">
         {login == false ? (
@@ -105,36 +135,37 @@ const Setquestion = () => {
         ) : (
           <div className="card-header">Hello, {pname}</div>
         )}
-        {timeloop.length==0?
-        <div className="card-body">
-          <form onSubmit={datasubmitsignin}>
-            <div className="row">
-              <div className="col">
-                <input
-                  type="text"
-                  name="user_name"
-                  onChange={handelinputsignin}
-                  className="form-control"
-                  placeholder="Enter Username"
-                  required
-                />
+        {login == false ? (
+          <div className="card-body">
+            <form onSubmit={datasubmitsignin}>
+              <div className="row">
+                <div className="col">
+                  <input
+                    type="text"
+                    name="user_name"
+                    onChange={handelinputsignin}
+                    className="form-control"
+                    placeholder="Enter Username"
+                    required
+                  />
+                </div>
+                <div className="col">
+                  <input
+                    type="text"
+                    name="password"
+                    onChange={handelinputsignin}
+                    className="form-control"
+                    placeholder="Enter Password"
+                    required
+                  />
+                </div>
               </div>
-              <div className="col">
-                <input
-                  type="text"
-                  name="password"
-                  onChange={handelinputsignin}
-                  className="form-control"
-                  placeholder="Enter Password"
-                  required
-                />
-              </div>
-            </div>
-            <button type="submit" className="btn btn-success col-sm-4 mt-3">
-              Login
-            </button>
-          </form>
-        </div>:null}
+              <button type="submit" className="btn btn-success col-sm-4 mt-3">
+                Login
+              </button>
+            </form>
+          </div>
+        ) : null}
       </div>
       {/* Question Section */}
 
@@ -178,11 +209,14 @@ const Setquestion = () => {
       {login == true ? (
         <div className="card text-center" style={{ backgroundColor: "wheat" }}>
           <div className="card-body">
-            {timeloop.map((val) => {
+            {timeloop.map((val, index) => {
               return (
-                <>
+                <div key={index}>
                   <div className="mb-3">
-                    <label htmlFor="formGroupExampleInput" className="form-label">
+                    <label
+                      htmlFor="formGroupExampleInput"
+                      className="form-label"
+                    >
                       Question : {val + 1}
                     </label>
                     <input
@@ -242,7 +276,7 @@ const Setquestion = () => {
                       />
                     </div>
                   </div>
-                </>
+                </div>
               );
             })}
             {timeloop.length != 0 ? (
@@ -278,7 +312,7 @@ const Setquestion = () => {
                   </button>
                   <button
                     className="btn btn-danger mt-5 col-10"
-                    onClick={() => window.location.reload(false)}
+                    onClick={Logout}
                   >
                     Logout
                   </button>
