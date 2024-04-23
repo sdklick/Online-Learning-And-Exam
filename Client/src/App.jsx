@@ -9,22 +9,24 @@ import Contact from "./Contact";
 import Adminpage from "./Adminpage.jsx";
 import Exampage from "./Exampage.jsx";
 import Examresult from "./Examresult.jsx";
-import Admin_private_component from "./Admin_private_component.jsx";
+import Admin_privateComponent from "./privateComponent/Admin_privateComponent.jsx";
 import Nopage404 from "./Nopage404.jsx";
+
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Admin_private_component/>}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/setquestion" element={<Setquestion />} />
-          <Route path="/exampage" element={<Exampage />} />
-          <Route path="/examresult" element={<Examresult />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Nopage404/>} />
+          <Route element={<Admin_privateComponent />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/setquestion" element={<Setquestion />} />
+            <Route path="/exampage" element={<Exampage />} />
+            <Route path="/examresult" element={<Examresult />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<Nopage404 />} />
           </Route>
+          
           <Route path="/adminpage" element={<Adminpage />} />
         </Routes>
       </BrowserRouter>

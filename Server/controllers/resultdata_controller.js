@@ -1,14 +1,15 @@
 const { registrationmodel } = require("../models/registrationdatamodel");
-const resultdata = async (req, res) => {
+const resultmarks = async (req, res) => {
   let data = req.body;
   let updateval = { obtainmark: data.obtainmarks, totalmark: data.totalmarks };
-  await registrationmodel.findOneAndUpdate(
+  await registrationmodel.updateOne(
     {
-      $and: [{ checkexamkey: data.examkey }, { email: data.email }],
+      email: data.email,
     },
-    { marks: updateval }
+    { $set: { marks: updateval } }
   );
+
   res.send({ post: true });
 };
 
-module.exports = { resultdata };
+module.exports = { resultmarks };

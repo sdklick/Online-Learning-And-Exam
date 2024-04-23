@@ -4,82 +4,74 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { sendContactData } from "./redux/slices/contactSlice.js";
 
 const Contact = () => {
   const [contact, setcontact] = useState({});
+
+  const dispatch = useDispatch();
+  const response = useSelector((state) => state.contactSlice);
+  const { data, isError, isLoading } = response;
 
   const contactinput = (val) => {
     const { name, value } = val.target;
     setcontact((values) => ({ ...values, [name]: value }));
   };
 
-  const contactdatasubmit = async (e) => {
+  const contactdatasubmit = (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:2000/api/contact", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(contact),
-    });
-    const firesponse = await response.json();
-    console.log(response);
-    if (firesponse.post == true) {
-      toast("👍 Thank you for contacting us");
-    }
+    dispatch(sendContactData(contact));
   };
+
+  if (data.post == true) {
+    toast("👍 Thank you for contacting us");
+  }
 
   return (
     <>
       <Nav />
 
-      <div class="card text-center mt-5" style={{ border: "none" }}>
-        <div class="card-header" style={{ border: "none" }}>
+      <div className="card text-center mt-5" style={{ border: "none" }}>
+        <div className="card-header" style={{ border: "none" }}>
           Contact Us
         </div>
-        <div class="card-body" style={{ border: "none" }}>
-          {/* <img
-          src="https://source.unsplash.com/1600x700/?macbook"
-          class="card-img "
-          alt="..."
-        /> */}
-          <div class="card " style={{ border: "none" }}>
-            <div class="row g-0">
-              <div class="col-md-4">
+        <div className="card-body" style={{ border: "none" }}>
+          <div className="card " style={{ border: "none" }}>
+            <div className="row g-0">
+              <div className="col-md-4">
                 <img
                   src="https://source.unsplash.com/550x800/?iphone"
-                  class="img-fluid rounded"
+                  className="img-fluid rounded"
                   alt="..."
                   style={{ height: "450px" }}
                 />
               </div>
-              <div class="col-md-8 mt-2">
-                <div class="card-body">
+              <div className="col-md-8 mt-2">
+                <div className="card-body">
                   <form onSubmit={contactdatasubmit}>
                     <div
-                      class="row border rounded-pill"
+                      className="row border rounded-pill"
                       style={{ backgroundColor: "orange" }}
                     >
-                      <div class="col ">
+                      <div className="col ">
                         <input
                           type="text"
                           name="fullname"
                           onChange={contactinput}
-                          class="form-control"
+                          className="form-control"
                           placeholder="Name"
                           aria-label="First name"
                           required
                         />
                       </div>
-                      <div class="col">
+                      <div className="col">
                         <input
                           type="number"
                           name="mobileno"
                           onChange={contactinput}
-                          class="form-control"
+                          className="form-control"
                           placeholder="Mobile No"
                           aria-label="Last name"
                           required
@@ -87,13 +79,16 @@ const Contact = () => {
                       </div>
                     </div>
 
-                    <div class="row mt-3" style={{ backgroundColor: "white" }}>
-                      <div class="col ">
+                    <div
+                      className="row mt-3"
+                      style={{ backgroundColor: "white" }}
+                    >
+                      <div className="col ">
                         <input
                           type="email"
                           name="email"
                           onChange={contactinput}
-                          class="form-control border border-secondary rounded-pill"
+                          className="form-control border border-secondary rounded-pill"
                           placeholder="Email                                        ⚛"
                           aria-label="First name"
                           required
@@ -101,26 +96,26 @@ const Contact = () => {
                       </div>
                     </div>
                     <div
-                      class="row mt-3 border rounded-pill"
+                      className="row mt-3 border rounded-pill"
                       style={{ backgroundColor: "green" }}
                     >
-                      <div class="col  ">
+                      <div className="col  ">
                         <input
                           type="text"
                           name="subject"
                           onChange={contactinput}
-                          class="form-control"
+                          className="form-control"
                           placeholder="Subject"
                           aria-label="First name"
                           required
                         />
                       </div>
-                      <div class="col">
+                      <div className="col">
                         <input
                           type="text"
                           name="message"
                           onChange={contactinput}
-                          class="form-control "
+                          className="form-control "
                           placeholder="Message"
                           aria-label="Last name"
                           required
@@ -138,7 +133,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-
       <ToastContainer />
     </>
   );

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const jwtkey = "mernecom";
+const jwtkey = process.env.JWTKEY
 const { adminlogincheck } = require("../models/admincheckmodel");
 
 const handeladmincheck = async (req, res) => {
