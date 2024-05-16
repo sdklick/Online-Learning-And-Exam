@@ -11,6 +11,7 @@ import Exampage from "./Exampage.jsx";
 import Examresult from "./Examresult.jsx";
 import Admin_privateComponent from "./privateComponent/Admin_privateComponent.jsx";
 import Nopage404 from "./Nopage404.jsx";
+import EXDashboardUpdate from "./EXDashboardUpdate.jsx";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/setquestion" element={<Setquestion />} />
+            <Route path="/updatequestion/:id" element={<EXDashboardUpdate/>} />
             <Route path="/exampage" element={<Exampage />} />
             <Route path="/examresult" element={<Examresult />} />
             <Route path="/contact" element={<Contact />} />
